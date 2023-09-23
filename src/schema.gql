@@ -1,0 +1,70 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Users {
+  id: Int!
+  email: String!
+  fullname: String!
+  password: String!
+}
+
+type UserResponse {
+  access_token: String!
+  user: Users!
+}
+
+type Product {
+  id: Float!
+  name: String!
+  description: String!
+  price: Float!
+  rank: Float!
+  state: String!
+}
+
+type Ingredient {
+  id: Int!
+  name: String!
+  description: String!
+  price: Float!
+  stock: Float!
+}
+
+type Query {
+  users: [Users!]!
+  user(email: String!): Users!
+  products: [Product!]!
+}
+
+type Mutation {
+  createUser(userInput: CreateUserInput!): Users!
+  login(loginUserInput: LoginUserInput!): UserResponse!
+  register(registerUserInput: RegisterUserInput!): UserResponse!
+  createIngredient(createIngredientInput: CreateIngredientInput!): Ingredient!
+  executeSeedProduct: String!
+}
+
+input CreateUserInput {
+  email: String!
+  fullname: String!
+  password: String!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+input RegisterUserInput {
+  email: String!
+  fullname: String!
+  password: String!
+}
+
+input CreateIngredientInput {
+  name: String!
+  description: String!
+  price: Float!
+  stock: Float!
+}
