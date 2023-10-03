@@ -9,6 +9,8 @@ import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
 import { IngredientModule } from './ingredient/ingredient.module';
 import { SeedModule } from './seed/seed.module';
+import { CarritoModule } from './carrito/carrito.module';
+import { LineaproductoModule } from './lineaproducto/lineaproducto.module';
 
 @Module({
   imports: [
@@ -33,6 +35,8 @@ import { SeedModule } from './seed/seed.module';
     ProductModule,
     IngredientModule,
     SeedModule,
+    CarritoModule,
+    LineaproductoModule,
   ],
   controllers: [],
   providers: [],

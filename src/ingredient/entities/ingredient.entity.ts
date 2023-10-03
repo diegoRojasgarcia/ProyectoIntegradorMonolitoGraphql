@@ -1,11 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Product } from 'src/product/entities/product.entity';
 
 @Entity()
 @ObjectType()
 export class Ingredient {
   @PrimaryGeneratedColumn()
-  @Field((type) => Int)
+  @Field(() => Int)
   id: number;
 
   @Column()
@@ -23,4 +24,12 @@ export class Ingredient {
   @Column()
   @Field()
   stock: number;
+
+  @Column()
+  @Field()
+  state: string;
+
+  @ManyToMany(() => Product, (product) => product.ingredients)
+  @Field(() => [Product])
+  products: Product[];
 }

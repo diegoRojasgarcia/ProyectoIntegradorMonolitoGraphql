@@ -1,7 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import {
   IsIn,
-  IsInt,
   IsNumber,
   IsOptional,
   IsPositive,
@@ -21,21 +20,17 @@ export class CreateProductDto {
   description: string;
 
   @IsOptional()
-  @Field()
   @IsNumber()
   @IsPositive()
+  @Field()
   rank: number;
 
-  @Field()
   @IsNumber()
   @IsPositive()
+  @Field()
   price: number;
 
-  @IsPositive()
-  @IsInt()
-  @Field()
-  stock: number;
-
   @IsIn(['available', 'out of stock'])
+  @Field()
   state: string;
 }

@@ -1,5 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+  OneToMany,
+} from 'typeorm';
+import { ObjectType, Field } from '@nestjs/graphql';
+import { Ingredient } from 'src/ingredient/entities/ingredient.entity';
+import { Lineaproducto } from 'src/lineaproducto/entities/lineaproducto.entity';
 
 @Entity()
 @ObjectType()
@@ -16,7 +25,7 @@ export class Product {
   @Field()
   description: string;
 
-  @Column('decimal', { precision: 6, scale: 3 })
+  @Column()
   @Field()
   price: number;
 
@@ -27,4 +36,14 @@ export class Product {
   @Column()
   @Field()
   state: string;
+
+  @ManyToMany(() => Ingredient, (ingredient) => ingredient.products)
+  @JoinTable({
+    name: 'product_ingredients',
+  })
+  @Field(() => [Ingredient])
+  ingredients: Ingredient[];
+
+  @OneToMany(() => Lineaproducto, (lineaproducto) => lineaproducto.product) // note: we will create author property in the Photo class below
+  lineproduct: Lineaproducto[];
 }

@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from '../entities/product.entity';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from '../dto/create-product.input';
+import { Ingredient } from 'src/ingredient/entities/ingredient.entity';
 
 @Injectable()
 export class ProductService {
@@ -13,7 +14,7 @@ export class ProductService {
 
   async findAll(): Promise<Product[]> {
     try {
-      return await this.productRepository.find();
+      return await this.productRepository.find({ relations: ['ingredients'] });
     } catch (error) {
       throw error;
     }
@@ -41,6 +42,18 @@ export class ProductService {
       return await this.productRepository.findOne({
         where: {
           name,
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findById(id: number): Promise<Product> {
+    try {
+      return await this.productRepository.findOne({
+        where: {
+          id,
         },
       });
     } catch (error) {

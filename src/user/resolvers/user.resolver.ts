@@ -16,12 +16,12 @@ export class UserResolver {
     return this.userService.findAll();
   }
 
-  @Query((returns) => Users)
+  @Query(() => Users)
   user(@Args('email') email: string) {
     return this.userService.findByEmail(email);
   }
 
-  @Mutation((returns) => Users)
+  @Mutation(() => Users)
   createUser(@Args('userInput') userInput: CreateUserInput) {
     return this.userService.createUser(userInput);
   }

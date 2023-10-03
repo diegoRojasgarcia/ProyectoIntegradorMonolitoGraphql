@@ -7,6 +7,11 @@ export class SeedResolver {
 
   @Mutation(() => String)
   executeSeedProduct() {
-    return this.seedService.runSeed();
+    return this.seedService.runSeedProduct();
+  }
+
+  @Mutation(() => String)
+  executeSeedIngredient() {
+    return this.seedService.runSeedIngredient();
   }
 }

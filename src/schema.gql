@@ -2,6 +2,41 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Ingredient {
+  id: Int!
+  name: String!
+  description: String!
+  price: Float!
+  stock: Float!
+  state: String!
+  products: [Product!]!
+}
+
+type Product {
+  id: Float!
+  name: String!
+  description: String!
+  price: Float!
+  rank: Float!
+  state: String!
+  ingredients: [Ingredient!]!
+}
+
+type Lineaproducto {
+  id: Float!
+  product: Product!
+  cant: Float!
+  subprice: Float!
+}
+
+type Carrito {
+  id: Int!
+  dateCreate: String!
+  user: Users!
+  lineaProducto: [Lineaproducto!]!
+  state: String!
+}
+
 type Users {
   id: Int!
   email: String!
@@ -14,27 +49,12 @@ type UserResponse {
   user: Users!
 }
 
-type Product {
-  id: Float!
-  name: String!
-  description: String!
-  price: Float!
-  rank: Float!
-  state: String!
-}
-
-type Ingredient {
-  id: Int!
-  name: String!
-  description: String!
-  price: Float!
-  stock: Float!
-}
-
 type Query {
   users: [Users!]!
   user(email: String!): Users!
   products: [Product!]!
+  findCarritoById(id: Float!): Carrito!
+  findLineProductById(id: Float!): Lineaproducto!
 }
 
 type Mutation {
@@ -43,6 +63,9 @@ type Mutation {
   register(registerUserInput: RegisterUserInput!): UserResponse!
   createIngredient(createIngredientInput: CreateIngredientInput!): Ingredient!
   executeSeedProduct: String!
+  executeSeedIngredient: String!
+  createCarrito(createCarritoInput: CreateCarritoInput!): Carrito!
+  createLineProduct(createLineaproductoInput: CreateLineaproductoInput!): Lineaproducto!
 }
 
 input CreateUserInput {
@@ -67,4 +90,14 @@ input CreateIngredientInput {
   description: String!
   price: Float!
   stock: Float!
+}
+
+input CreateCarritoInput {
+  idUser: Float!
+}
+
+input CreateLineaproductoInput {
+  idCarrito: Float!
+  idProduct: Float!
+  cant: Float!
 }

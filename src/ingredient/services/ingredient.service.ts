@@ -44,6 +44,18 @@ export class IngredientService {
     }
   }
 
+  async findById(id: number): Promise<Ingredient> {
+    try {
+      return await this.ingredientRepository.findOne({
+        where: {
+          id,
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   // findAll() {
   //   return `This action returns all ingredient`;
   // }
