@@ -13,7 +13,7 @@ export class CarritoService {
     private readonly userService: UserService,
   ) {}
 
-  async create(createCarritoInput: CreateCarritoInput) {
+  async createCarrito(createCarritoInput: CreateCarritoInput) {
     const { idUser } = createCarritoInput;
 
     try {
@@ -44,16 +44,13 @@ export class CarritoService {
     }
   }
 
-  // findAll() {
-  //   return `This action returns all carrito`;
-  // }
-  // findOne(id: number) {
-  //   return `This action returns a #${id} carrito`;
-  // }
-  // update(id: number, updateCarritoInput: UpdateCarritoInput) {
-  //   return `This action updates a #${id} carrito`;
-  // }
-  // remove(id: number) {
-  //   return `This action removes a #${id} carrito`;
-  // }
+  async vaciarCarrito(id: number) {
+    try {
+      const carritoBD = await this.findById(id);
+      const { lineaProducto, ...detailcarritoBD } = carritoBD;
+      lineaProducto.forEach((lineaproducto) => {});
+    } catch (error) {
+      return error;
+    }
+  }
 }

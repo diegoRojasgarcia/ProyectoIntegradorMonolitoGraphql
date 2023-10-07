@@ -12,7 +12,7 @@ export class CarritoResolver {
   createCarrito(
     @Args('createCarritoInput') createCarritoInput: CreateCarritoInput,
   ) {
-    return this.carritoService.create(createCarritoInput);
+    return this.carritoService.createCarrito(createCarritoInput);
   }
 
   // @Query('carrito')

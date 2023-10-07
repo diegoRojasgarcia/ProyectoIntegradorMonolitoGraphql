@@ -13,5 +13,6 @@ import { CarritoModule } from 'src/carrito/carrito.module';
     CarritoModule,
   ],
   providers: [LineaproductoResolver, LineaproductoService],
+  exports: [LineaproductoService],
 })
 export class LineaproductoModule {}
