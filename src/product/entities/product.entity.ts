@@ -37,6 +37,10 @@ export class Product {
   @Field()
   state: string;
 
+  @Column()
+  @Field()
+  image: string;
+
   @ManyToMany(() => Ingredient, (ingredient) => ingredient.products)
   @JoinTable({
     name: 'product_ingredients',

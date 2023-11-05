@@ -19,6 +19,7 @@ type Product {
   price: Float!
   rank: Float!
   state: String!
+  image: String!
   ingredients: [Ingredient!]!
 }
 

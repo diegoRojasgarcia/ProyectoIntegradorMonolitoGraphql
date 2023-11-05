@@ -96,5 +96,12 @@ export const initialDataIngredients: SeedDataIngredients = {
       stock: 60,
       state: 'available',
     },
+    {
+      name: 'bebida',
+      description: 'Exquisitos bebida',
+      price: 700,
+      stock: 60,
+      state: 'available',
+    },
   ],
 };

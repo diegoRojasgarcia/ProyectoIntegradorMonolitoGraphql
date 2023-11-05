@@ -33,4 +33,8 @@ export class CreateProductDto {
   @IsIn(['available', 'out of stock'])
   @Field()
   state: string;
+
+  @IsString()
+  @Field()
+  image: string;
 }
