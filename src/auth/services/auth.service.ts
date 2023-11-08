@@ -8,12 +8,14 @@ import { LoginUserInput } from '../dto/login-user.input';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { RegisterUserInput } from '../dto/register-user.input';
+import { CarritoService } from 'src/carrito/services/carrito.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
+    private readonly carritoService: CarritoService,
   ) {}
 
   async register(registerUserInput: RegisterUserInput) {
@@ -29,6 +31,10 @@ export class AuthService {
         user: usuario,
         access_token: this.getJwtToken({ id: usuario.id }),
       };
+      console.log(usuario.id);
+      const carrito = await this.carritoService.createCarrito({
+        idUser: usuario.id,
+      });
     } catch (error) {
       throw error;
     }

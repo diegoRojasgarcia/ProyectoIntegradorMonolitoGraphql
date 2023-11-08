@@ -15,12 +15,14 @@ export class UserResolver {
   users() {
     return this.userService.findAll();
   }
-
+  @Query(() => Users)
+  userById(@Args('id') id: number) {
+    return this.userService.findById(id);
+  }
   @Query(() => Users)
   user(@Args('email') email: string) {
     return this.userService.findByEmail(email);
   }
-
   @Mutation(() => Users)
   createUser(@Args('userInput') userInput: CreateUserInput) {
     return this.userService.createUser(userInput);

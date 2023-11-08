@@ -27,6 +27,7 @@ export class Users {
   @Field()
   password: string;
 
-  @OneToMany(() => Carrito, (carrito) => carrito.user) // note: we will create author property in the Photo class below
+  @OneToMany(() => Carrito, (carrito) => carrito.user)
+  @Field(() => [Carrito])
   carritos: Carrito[];
 }

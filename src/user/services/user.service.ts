@@ -13,7 +13,7 @@ export class UserService {
 
   async findAll(): Promise<Users[]> {
     try {
-      return await this.usersRepository.find();
+      return await this.usersRepository.find({ relations: ['carritos'] });
     } catch (error) {
       throw error;
     }
@@ -30,19 +30,29 @@ export class UserService {
       throw error;
     }
   }
-
-  async findByEmail(email: string): Promise<Users> {
+  async findById(id: number): Promise<Users> {
     try {
       return await this.usersRepository.findOne({
         where: {
-          email,
+          id,
         },
       });
     } catch (error) {
       throw error;
     }
   }
-
+  async findByEmail(email: string): Promise<Users> {
+    try {
+      return await this.usersRepository.findOne({
+        where: {
+          email,
+        },
+        relations: ['carritos'],
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
   async createUser(createUserInput: CreateUserInput): Promise<Users> {
     try {
       const { email } = createUserInput;

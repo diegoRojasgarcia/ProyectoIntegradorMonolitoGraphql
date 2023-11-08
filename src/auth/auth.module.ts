@@ -6,11 +6,13 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { CarritoModule } from 'src/carrito/carrito.module';
 
 @Module({
   imports: [
     UserModule,
     PassportModule,
+    CarritoModule,
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,

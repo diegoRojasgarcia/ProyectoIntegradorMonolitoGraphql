@@ -48,6 +48,7 @@ export class CarritoService {
     try {
       const carritoBD = await this.findById(id);
       const { lineaProducto, ...detailcarritoBD } = carritoBD;
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       lineaProducto.forEach((lineaproducto) => {});
     } catch (error) {
       return error;
