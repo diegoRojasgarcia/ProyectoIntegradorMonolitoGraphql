@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { CarritoService } from '../services/carrito.service';
 import { CreateCarritoInput } from '../dto/create-carrito.input';
 import { UpdateCarritoInput } from '../dto/update-carrito.input';
@@ -25,6 +25,10 @@ export class CarritoResolver {
     return this.carritoService.findById(id);
   }
 
+  @Query(() => String)
+  getCarritoState(@Args('id', { type: () => Int }) id: number) {
+    return this.carritoService.getCarritoState(id);
+  }
   // @Mutation('updateCarrito')
   // update(@Args('updateCarritoInput') updateCarritoInput: UpdateCarritoInput) {
   //   return this.carritoService.update(updateCarritoInput.id, updateCarritoInput);

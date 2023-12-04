@@ -40,10 +40,6 @@ export class LineaproductoService {
     }
   }
 
-  // findAll() {
-  //   return `This action returns all lineaproducto`;
-  // }
-
   async findById(id: number): Promise<Lineaproducto> {
     try {
       return await this.lineProductRepository.findOne({
@@ -56,11 +52,41 @@ export class LineaproductoService {
     }
   }
 
-  // update(id: number, updateLineaproductoInput: UpdateLineaproductoInput) {
-  //   return `This action updates a #${id} lineaproducto`;
-  // }
+  async editProductLineQuantity(
+    id: number,
+    newQuantity: number,
+  ): Promise<Lineaproducto> {
+    const productLine = await this.findById(id);
+    if (!productLine) {
+      throw new HttpException('Product line not found', HttpStatus.NOT_FOUND);
+    }
+    const updatedPrice = newQuantity * productLine.product.price;
+    productLine.cant = newQuantity;
+    productLine.subprice = updatedPrice;
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} lineaproducto`;
-  // }
+    return this.lineProductRepository.save(productLine);
+  }
+
+  async deleteProductLine(id: number): Promise<void> {
+    const productLine = await this.findById(id);
+    if (!productLine) {
+      throw new HttpException('Product line not found', HttpStatus.NOT_FOUND);
+    }
+
+    await this.lineProductRepository.remove(productLine);
+  }
+
+  async findAllByCartId(cartId: number): Promise<Lineaproducto[]> {
+    try {
+      return await this.lineProductRepository.find({
+        where: { carrito: { id: cartId } },
+        relations: ['product', 'carrito'],
+      });
+    } catch (error) {
+      throw new HttpException(
+        'Error al buscar líneas de producto',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
 }

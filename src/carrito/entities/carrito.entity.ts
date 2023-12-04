@@ -34,5 +34,5 @@ export class Carrito {
 
   @Column({ type: 'text', default: 'Active' })
   @Field()
-  state?: String;
+  state?: string;
 }

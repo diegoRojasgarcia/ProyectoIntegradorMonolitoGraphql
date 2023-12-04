@@ -56,8 +56,10 @@ type Query {
   userById(id: Float!): Users!
   user(email: String!): Users!
   findCarritoById(id: Float!): Carrito!
+  getCarritoState(id: Int!): String!
   products: [Product!]!
   findLineProductById(id: Float!): Lineaproducto!
+  findAllLineProductsInCart(cartId: Int!): [Lineaproducto!]!
 }
 
 type Mutation {
@@ -69,6 +71,8 @@ type Mutation {
   executeSeedProduct: String!
   executeSeedIngredient: String!
   createLineProduct(createLineaproductoInput: CreateLineaproductoInput!): Lineaproducto!
+  editLineProductQuantity(id: Float!, newQuantity: Float!): Lineaproducto!
+  deleteLineProduct(id: Float!): Boolean!
 }
 
 input CreateUserInput {
