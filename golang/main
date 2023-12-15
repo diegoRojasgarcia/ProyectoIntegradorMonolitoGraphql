@@ -1,27 +1,39 @@
-
 package main
 
 import (
-    "database/sql"
-    "fmt"
+	"database/sql"
+	"fmt"
 )
 
 func main() {
-    // Importar el controlador de la base de datos MySQL
-    import _ "github.com/go-sql-driver/mysql"
+	// Conectarse a la base de datos
+	db, err := sql.Open("mysql", "postgress:ZeroZX@tcp(localhost:3306)/DataBaseGraphql")
+	if err != nil {
+		panic(err)
+	}
 
-    // Crear una cadena de conexión
-    connStr := "postgress:ZeroZX@tcp(localhost:3306)/database"
+	// Ejecutar la consulta
+	rows, err := db.Query("SELECT * FROM product")
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+	// Imprime las tres primeras filas
+	for i := 0; i < 3; i++ {
+		if err := rows.Next(); err != nil {
+			break
+		}
 
-    // Crear una conexión a la base de datos
-    db, err := sql.Open("mysql", connStr)
-    if err != nil {
-        fmt.Println(err)
-        return
-    }
+		var id int
+		var name string
+		var price float64
+		var rank int
 
-    // Cerrar la conexión
-    defer db.Close()
+		err = rows.Scan(&id, &name, &price, &rank)
+		if err != nil {
+			break
+		}
+
+		fmt.Println(id, name, price, rank)
+	}
 }
-
-
