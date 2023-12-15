@@ -12,3 +12,4 @@ Se debe instalar ciertas librerias de la siguiente forma
 3. Instalar los paquetes a usar
     -   Install Go-SQL-Driver
         go get github.com/go-sql-driver/mysql
+        go get github.com/lib/pq

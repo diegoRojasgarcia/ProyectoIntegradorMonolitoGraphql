@@ -3,9 +3,12 @@ package main
 import (
 	"database/sql"
 	"fmt"
+
+	_ "github.com/lib/pq"
 )
 
 func main() {
+
 	// Conectarse a la base de datos
 	db, err := sql.Open("mysql", "postgress:ZeroZX@tcp(localhost:3306)/DataBaseGraphql")
 	if err != nil {
